@@ -26,5 +26,6 @@ for arch in x86 x64 arm arm64; do
 	[ ! -f src-history.txt ] || mv {src-,}history.txt
 	cp -r ../Lang .
 	cp -r ../7-zip.chm . || true
+	[[ ${arch} != x64 ]] || install -v ../x86/7-zip.dll 7-zip32.dll
 	../x64/7zr.exe a ../7zip-${version}-${arch}.7z .)
 done
