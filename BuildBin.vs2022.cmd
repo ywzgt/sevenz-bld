@@ -37,7 +37,7 @@ pushd 7z\CPP\7zip
 echo ::
 echo ::Building 7zip for %1
 echo ::
-set CL=/MP
+set CL=/MP -w
 set CFLAGS=%CFLAGS% %CL%
 set CXXFLAGS=%CXXFLAGS% %CL%
 nmake

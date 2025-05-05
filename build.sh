@@ -10,6 +10,7 @@ version=$(grep '^#define MY_VERSION_NUMBERS' 7z/C/7zVersion.h | cut -d' ' -f3 | 
 echo "version=${version}" >> $GITHUB_ENV
 
 ./BuildBin.vs2022.cmd
+./BuildBin.vs2022.cmd arm64
 
 while read -r f; do
 	arch=${f%/*}
@@ -21,6 +22,7 @@ wget -nv https://7-zip.org/a/7z${version//.}-x64.exe
 x64/7z.exe x 7z${version//.}-x64.exe
 
 for arch in x86 x64 arm arm64; do
+	[ -d ${arch} ] || continue
 	(cd ${arch}
 	[[ -z $(find ../7z -name \*.txt) ]] || find ../7z -name \*.txt | xargs install -vt .
 	[ ! -f src-history.txt ] || mv {src-,}history.txt
